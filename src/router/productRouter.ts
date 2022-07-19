@@ -13,4 +13,9 @@ const projectBusiness = new ProductBusiness(
 
 const projectController = new ProductController(projectBusiness);
 
-productRouter.post('/', projectController.registerProduct);
+productRouter.post('/product', projectController.registerProduct);
+productRouter.get('/product', projectController.getAllProducts);
+productRouter.get('/product/:id', projectController.getProductById);
+productRouter.delete('/product/:id', projectController.deleteProduct);
+
+

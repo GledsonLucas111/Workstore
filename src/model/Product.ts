@@ -5,7 +5,10 @@ export class Product {
     private color: string,
     private size: string,
     private description: string,
-    private price: string
+    private price: string,
+    private img1: string,
+    private img2: string,
+    private img3: string
   ) {}
 
   getId = (): string => {
@@ -26,6 +29,15 @@ export class Product {
   getPrice = (): string => {
     return this.price;
   };
+  getImg1 = (): string => {
+    return this.img1;
+  };
+  getImg2 = (): string => {
+    return this.img2;
+  };
+  getImg3 = (): string => {
+    return this.img3;
+  };
 
   setId = (id: string) => {
     this.id = id;
@@ -45,7 +57,15 @@ export class Product {
   setPrice = (price: string) => {
     this.price = price;
   };
-
+  setImg1 = (img1: string) => {
+    this.img1 = img1;
+  };
+  setImg2 = (img2: string) => {
+    this.img2 = img2;
+  };
+  setImg3 = (img3: string) => {
+    this.img3 = img3;
+  };
   static toProductModel(data: Product): Product {
     return new Product(
       data.id,
@@ -53,7 +73,10 @@ export class Product {
       data.color,
       data.size,
       data.description,
-      data.price
+      data.price,
+      data.img1,
+      data.img2,
+      data.img3
     );
   }
 }

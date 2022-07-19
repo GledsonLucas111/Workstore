@@ -10,11 +10,11 @@ export class ProductBusiness {
     private idGenerator: IdGenerator
   ) {}
   registerProduct = async (input: IProductDTO) => {
-    const { name, color, size, description, price } = input;
+    const { name, color, size, description, price, img1, img2, img3 } = input;
     if (!name || !color || !size || !description || !price) {
       throw new CustomError(
         422,
-        "Preencha os campos: 'name', 'color, 'size', 'description', 'price' no body."
+        "Preencha os campos: 'name', 'color, 'size', 'description' e 'price' no body."
       );
     }
 
@@ -26,9 +26,37 @@ export class ProductBusiness {
       color,
       size,
       description,
-      price
+      price,
+      img1,
+      img2,
+      img3
     );
 
     await this.productDatabase.insert(product);
+  };
+  getAllProducts = async (): Promise<Product> => {
+    const result: any = await this.productDatabase.getAllProducts();
+
+    if (result.length === 0) {
+      throw new CustomError(404, "Produto não encontrado");
+    }
+    return result;
+  };
+  getProductById = async (id: string): Promise<Product> => {
+    const result: any = await this.productDatabase.getProductById(id);
+
+    if (result.length === 0) {
+      throw new CustomError(404, "Produto não encontrado");
+    }
+    return result;
+  };
+
+  deleteProduct = async (id: string): Promise<void> => {
+    const idExists = await this.productDatabase.getProductById(id);
+
+    if (!idExists) {
+      throw new CustomError(404, "Produto não encontrado");
+    }
+    await this.productDatabase.deleteProduct(id);
   };
 }

@@ -3,4 +3,5 @@ export interface IContributorDTO {
     email: string;
     password: string;
 }
+
   
